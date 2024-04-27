@@ -2,8 +2,9 @@ const Pool = require("pg").Pool;
 const pg = require("pg");
 
 const pool = new Pool({
-  connectionString: "postgres://default:Z8S9fLKiFsNB@ep-fragrant-wave-a4jybvvh.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+  connectionString: "postgres://default:rCDOsz5GiM8t@ep-morning-recipe-a4myt5w0.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
 })
+
 pool.on("error", (error, client) => {
   console.log(error);
 });
@@ -29,17 +30,14 @@ async function initDatabase() {
     student_id int primary key not null,
     block_id int,
     usn text ,
-    room text,
-    foreign key (student_id) references users(user_id) on delete cascade,
-    foreign key (block_id) references block(block_id) on delete cascade
+    room text
+   
 );`
 
   const warden = `create table if not exists warden (
   warden_id int primary key not null,
-  block_id int,
-  foreign key (warden_id) references users(user_id) on delete cascade,
-  foreign key (block_id) references block(block_id)
-  on delete cascade
+  block_id int
+  
 );`
 
   const category = `create table if not exists category (
@@ -49,9 +47,8 @@ async function initDatabase() {
 
   const workers = `create table if not exists workers (
   worker_id int primary key not null,
-  category_id int,
-  foreign key (worker_id) references users(user_id) on delete cascade,
-  foreign key (category_id) references category(category_id) on delete cascade
+  category_id int
+  
 );`
 
 
@@ -67,12 +64,8 @@ async function initDatabase() {
     room text,
     is_completed BOOLEAN,
     created_at timestamp,
-    assigned_at timestamp,
-    foreign key (student_id) references student(student_id) on delete cascade,
-    foreign key (block_id) references block(block_id) on delete cascade,
-    foreign key (assigned_worker_id) references workers(worker_id) on delete cascade,
-    foreign key (category_id) references category(category_id) on delete cascade,
-    foreign key (warden_id) references warden(warden_id) on delete cascade
+    assigned_at timestamp
+   
 );
 `
   await pool.query(users);
