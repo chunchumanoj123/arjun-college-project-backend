@@ -177,7 +177,8 @@ app.use('/workers', authorizeWorker, workersRoutes);
 //   }
 // });
 
-app.listen(3000, () => {
+app.listen(3000, async () => {
   db.initDatabase();
+  console.log(await db.initDatabase())
   console.log("listening");
 });

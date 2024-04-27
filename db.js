@@ -2,13 +2,8 @@ const Pool = require("pg").Pool;
 const pg = require("pg");
 
 const pool = new Pool({
-  user: "postgres",
-  password: "password",
-  host: "localhost",
-  port: 5432,
-  database: "check"
-});
-
+  connectionString: "postgres://default:Z8S9fLKiFsNB@ep-fragrant-wave-a4jybvvh.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+})
 pool.on("error", (error, client) => {
   console.log(error);
 });
