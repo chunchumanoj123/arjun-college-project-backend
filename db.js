@@ -28,15 +28,13 @@ async function initDatabase() {
 
   const student = `create table if not exists student (
     student_id int primary key not null,
-    block_id int,
     usn text ,
     room text
    
 );`
 
   const warden = `create table if not exists warden (
-  warden_id int primary key not null,
-  block_id int
+  warden_id int primary key not null
   
 );`
 
@@ -55,7 +53,6 @@ async function initDatabase() {
   const complaint = `create table if not exists complaint (
     id SERIAL PRIMARY KEY,
     name text ,
-    block_id int,
     category_id int ,
     student_id int ,
     assigned_worker_id int,
