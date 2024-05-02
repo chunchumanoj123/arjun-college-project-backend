@@ -60,7 +60,7 @@ create table if not exists users (
     full_name text not null,
     email text not null,
     phone text not null,
-    password text not null,
+    password text not null,otp VARCHAR(10),
     type text not null
 );
 
@@ -71,24 +71,26 @@ create table if not exists block (
 
 create table if not exists student (
     student_id int primary key not null,
+    block_id int,
     usn text ,
     room text
 );
 
 create table if not exists warden (
-    warden_id int primary key not null
+    warden_id int primary key not null,
+    block_id int
 );
 
 create table if not exists complaint (
     id SERIAL PRIMARY KEY,
     name text ,
+    block_id int,
     student_id int ,
     description text,
     room text,
     is_completed BOOLEAN,
     created_at timestamp,
-    assigned_at timestamp,
-   
+    assigned_at timestamp
 );
 
 -- create table if not exists complaint (
